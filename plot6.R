@@ -1,11 +1,13 @@
 require(ggplot2)
 require(dplyr)
 
+
+#TODO: add comments
 plot6 <- function() {
         NEI <- readRDS("./data/summarySCC_PM25.rds")
-        NEI_sub <- subset(NEI, NEI$fips == "24510" | NEI$fips == "06037")
-       	
-	
+	#Subset LA and Baltimore City
+	NEI_sub <- subset(NEI, NEI$fips == "24510" | NEI$fips == "06037")
+
 	SCC <- readRDS("./data/Source_Classification_Code.rds")
 	
 	#searching for "Mobile -" in order to account for all types
@@ -14,6 +16,7 @@ plot6 <- function() {
 	good_SCC <- as.character(SCC$SCC[grep("Mobile -",SCC$EI.Sector)])
 	good_NEI <- subset(NEI_sub, NEI_sub$SCC %in% good_SCC)
 	
+	#sum Emissions by year and city
 	mdata <- aggregate(Emissions ~ year + fips, data=good_NEI, sum)
 
         png("./Plot6.png",width = 550, height = 550)
