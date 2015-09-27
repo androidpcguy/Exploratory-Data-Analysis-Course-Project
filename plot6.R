@@ -2,8 +2,12 @@ require(ggplot2)
 require(dplyr)
 
 
-#TODO: add comments
+#aggregates emissions from motor sources (cars, trucks, tractors, ships, aircraft, etc...) by year and city and displays both sets of data on one plot
+#with different colors for LA and Baltimore City
+
+#LA HAS SEEN A BIGGER CHANGES IN EMISSIONS OVER TIME THAN BALTIMORE CITY. LA HAS HIGHER EMISSIONS FROM MOTOR SOURCES OVERALL THAN BALTIMORE CITY.
 plot6 <- function() {
+
         NEI <- readRDS("./data/summarySCC_PM25.rds")
 	#Subset LA and Baltimore City
 	NEI_sub <- subset(NEI, NEI$fips == "24510" | NEI$fips == "06037")
@@ -21,6 +25,7 @@ plot6 <- function() {
 
         png("./Plot6.png",width = 550, height = 550)
 
+	#display data from both cities on one plot, different colors for each city
         mplot <- qplot(year, Emissions, data=mdata, color=fips) + geom_line() +
                 ylab("Emissions (tons)") + xlab("Year") + scale_x_continuous(breaks=seq(1999,2008,3),
                 labels=as.character(seq(1999,2008,3))) + ggtitle("Comparison of PM25 Emissions\nfrom Motor Vehicle sources from 1999-2008 in\nLos Angeles, CA and Baltimore City, MD") + scale_color_discrete(name = "Emission type", labels=c("Los Angeles", "Baltimore City"))

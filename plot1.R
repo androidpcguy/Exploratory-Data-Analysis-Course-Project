@@ -5,8 +5,10 @@ require(dplyr)
 #during years 1999-2008.
 #TOTAL EMISSION OF PM2.5 CLEARLY DECREASES DURING 1999-2008 ACROSS US
 plot1 <- function() {
+	
 	NEI <- readRDS("./data/summarySCC_PM25.rds")
 	
+	#Sum emissions by year
 	total_emissions <- aggregate(Emissions ~ year, data=NEI, sum)
 	
 	#divide by 1000 to show on graph in units of (1000s tons)

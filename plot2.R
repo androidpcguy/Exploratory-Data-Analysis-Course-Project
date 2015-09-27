@@ -8,10 +8,13 @@ plot2 <- function() {
 	
 	#subset to only baltimore city data
 	NEI_balt_city <- subset(NEI, NEI$fips == "24510")
+	
+	#sum emissions by year
 	emissions <- aggregate(Emissions ~ year, data=NEI_balt_city, sum)
         png("./Plot2.png",width = 500, height = 500)
         par(mfrow=c(1,1))
 	
+	#line plot emissions vs year
 	mplot <- plot(x=emissions$year, y=emissions$Emissions, main="Total Emissions of PM25 in Baltimore City from Years 1999-2008", xlab="Year", ylab="PM25 Emissions (tons)", xaxt="n",ylim=c(1300,3300),pch=19)
 	lines(emissions$year, emissions$Emissions)
 	axis(1, at=seq(1999,2008,3), labels=seq(1999,2008,3))

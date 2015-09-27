@@ -3,6 +3,9 @@ require(ggplot2)
 
 #TODO: add comments
 
+#Sums up emssions by ALL mobile sources (cars, trucks, ships, aircraft, etc...) by year and displays data on a line graph.
+
+#EMISSIONS DECREASED FROM 1999 TO 2002 AND STAYED ABOUT THE SAME TILL 2005 BUT INCREASED FROM 2005 TO 2008.
 plot5 <- function() {
 	NEI <- readRDS("./data/summarySCC_PM25.rds")
 	NEI_baltimore_city <- subset(NEI, NEI$fips == "24510")
